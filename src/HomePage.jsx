@@ -8,7 +8,10 @@ function HomePage() {
         <h1>Welcome to MY FIT! The best workout tracker out there!</h1>
         <Box textAlign='center'>
             <Button variant='contained'>
-                Start Workout
+                Create Workout
+            </Button>
+            <Button variant='contained'>
+                Choose Workout
             </Button>
         </Box>
     </div>
