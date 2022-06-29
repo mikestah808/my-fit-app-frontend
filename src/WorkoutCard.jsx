@@ -5,12 +5,18 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-function WorkoutCard({ workout }) {
+function WorkoutCard({ workout, onDeleteWorkout }) {
 
-  // console.log(title)
+  function handleDeleteClick() {
+    fetch(`http://localhost:9292/workouts/${workout.id}`, {
+      method: "DELETE",
+    })
+      .then((r) => r.json())
+      .then((deletedWorkout) => onDeleteWorkout(deletedWorkout));
+  }
   
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 275 }} variant="outlined">
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {workout.date}
@@ -23,9 +29,9 @@ function WorkoutCard({ workout }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Select</Button>
+        <Button size="small">View</Button>
         <Button size="small">Edit</Button>
-        <Button size="small">Delete</Button>
+        <Button onClick={handleDeleteClick} size="small">Delete</Button>
       </CardActions>
     </Card>
   );

@@ -1,8 +1,8 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import NavBar from './Navbar'
-import CardContainer from './CardContainer';
 
 const BASE_URL = "http://localhost:9292"
 
@@ -16,17 +16,42 @@ function App() {
   }, []) 
 
 
+  // create function that deletes workout and updates json data 
+  // create delete request 
+  function onDeleteWorkout(deletedWorkout){
+    const filterWorkouts = workouts.filter((workout) => workout.id !== deletedWorkout.id)  
+    setWorkouts(filterWorkouts)
+  }
+
+  //create new workout
+
+  // function onCreateWorkout(){
+
+  // }
+
+  //view exercises within workout card when view button is clicked!!!!
+
+
+
+  //edit workout 
+
+  // function onEditWorkout(){
+    
+  // }
+
+
 
 
 
 
 
   return (
-    <div>
+    <BrowserRouter>
      <NavBar />
-     <HomePage />
-     <CardContainer workouts = {workouts}/>
-    </div>
+     <Routes>
+     <Route path="/" element={ <HomePage onDeleteWorkout={onDeleteWorkout} workouts={workouts}/> }/>
+     </Routes>
+    </BrowserRouter>
   );
 }
 
