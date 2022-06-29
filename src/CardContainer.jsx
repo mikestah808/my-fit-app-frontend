@@ -1,10 +1,10 @@
-import Card from './Card';
+import WorkoutCard from './WorkoutCard';
 import React from 'react'
 
 function CardContainer() {
   return (
     <div>
-        <Card />
+        <WorkoutCard />
     </div>
   )
 }
