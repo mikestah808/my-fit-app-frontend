@@ -7,13 +7,14 @@ import CardContainer from './CardContainer';
 const BASE_URL = "http://localhost:9292"
 
 function App() {
-  const [workout, setWorkout] = useState([])
+  const [workouts, setWorkouts] = useState([])
 
   useEffect(() => {
     fetch(BASE_URL + '/workouts')
     .then((resp) => resp.json())
-    .then((workouts) => console.log(workouts))
+    .then((workoutData) => setWorkouts(workoutData))
   }, []) 
+
 
 
 
@@ -24,7 +25,7 @@ function App() {
     <div>
      <NavBar />
      <HomePage />
-     <CardContainer />
+     <CardContainer workouts = {workouts}/>
     </div>
   );
 }
