@@ -1,10 +1,12 @@
 import './App.css';
-import Button from '@mui/material/Button';
+import HomePage from './HomePage';
+import NavBar from './Navbar'
 
 function App() {
   return (
     <div>
-     <Button variant="contained">Hello World</Button>
+     <NavBar />
+     <HomePage />
     </div>
   );
 }

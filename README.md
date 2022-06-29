@@ -1,4 +1,6 @@
 # My Fit Application 
+
+### Overview
 This is a frontend application for a workout tracker app
 
 ### Requirements 
