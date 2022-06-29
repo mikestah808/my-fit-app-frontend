@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,9 +17,9 @@ import Button from '@mui/material/Button';
             MY FIT
           </Typography>
           <Box>
-            <Button variant="">Home</Button>
-            <Button variant="">Login</Button>
-            <Button variant="">Sign Up</Button>
+            <Button variant="" to="/" component={ Link }>Home</Button>
+            <Button variant="" to="/login" component={ Link }>Login</Button>
+            <Button variant="" to="/signup" component={ Link }>Sign Up</Button>
           </Box>
           </Toolbar>
         </AppBar>

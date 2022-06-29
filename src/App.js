@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import NavBar from './Navbar'
+import Signup from './authentication/Signup';
+import Login from './authentication/Login';
 
 const BASE_URL = "http://localhost:9292"
 
@@ -49,7 +51,9 @@ function App() {
     <BrowserRouter>
      <NavBar />
      <Routes>
-     <Route path="/" element={ <HomePage onDeleteWorkout={onDeleteWorkout} workouts={workouts}/> }/>
+        <Route path="/" element={ <HomePage onDeleteWorkout={onDeleteWorkout} workouts={workouts}/> }/>
+        <Route path="/login" element={ <Login /> }/>
+        <Route path="/signup" element={ <Signup /> }/>
      </Routes>
     </BrowserRouter>
   );
