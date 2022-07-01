@@ -6,6 +6,7 @@ import NavBar from './Navbar'
 import Signup from './authentication/Signup';
 import Login from './authentication/Login';
 
+
 const BASE_URL = "http://localhost:9292"
 
 function App() {

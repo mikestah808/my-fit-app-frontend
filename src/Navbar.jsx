@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import SearchBar from './SearchBar';
 
   
   function Navbar() {
@@ -21,6 +22,7 @@ import Button from '@mui/material/Button';
             <Button variant="" to="/login" component={ Link }>Login</Button>
             <Button variant="" to="/signup" component={ Link }>Sign Up</Button>
           </Box>
+          <SearchBar />
           </Toolbar>
         </AppBar>
       </Box>
