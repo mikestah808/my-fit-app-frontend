@@ -51,12 +51,11 @@ const Search = styled('div')(({ theme }) => ({
   function SearchBar({ search, setSearch }){
 
 
-    function handleSearch(e){
-      // console.log(e.target.value)
-      setSearch(e.target.value)
-      // console.log(search)
-      // setSearch(e.target.value)
+    function handleSearch(event){
+      setSearch(event.target.value)
     }
+
+    console.log(search)
 
 
 

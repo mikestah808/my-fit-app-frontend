@@ -7,7 +7,7 @@ import { styled } from '@mui/system';
 import clsx from 'clsx';
 import { Button } from '@mui/material';
 
-const BASE_URL = "http://localhost:9292"
+const WORKOUTS_URL = "http://localhost:9292/workouts"
 
 const blue = {
   100: '#DAECFF',
@@ -140,28 +140,28 @@ function WorkoutForm({ workouts, setWorkouts }) {
       date: date,
       level: level
     };
-    const dataArray = [...workouts, formData];
-    setWorkouts(dataArray);
+
     //what do we do once this data is submitted? 
     //send the state value of submittedData as a POST request to the correct path
-    fetch(BASE_URL +"/workouts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(workouts),
-    })
-    .then(response => response.json())
-    .then(workoutData => {
-    setWorkouts(workoutData)
-  })
+    fetch(WORKOUTS_URL, {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(formData)
+})
+.then(response => response.json())
+.then(workoutData => {
+  setWorkouts(workoutData);
+})
 
     setTitle("");
     setDate("");
     setLevel("");
   }
 
-
+//if the formData input values are not all filled out, then throw out error 
+//else, do the POST request 
 
 
   return (

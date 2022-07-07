@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import SearchBar from './SearchBar';
 
   
-  function Navbar() {
+  function Navbar({ search, setSearch }) {
     return (
       <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -22,7 +22,7 @@ import SearchBar from './SearchBar';
             <Button variant="" to="/login" component={ Link }>Login</Button>
             <Button variant="" to="/signup" component={ Link }>Sign Up</Button>
           </Box>
-          <SearchBar />
+          <SearchBar search={search} setSearch={setSearch}/>
           </Toolbar>
         </AppBar>
       </Box>

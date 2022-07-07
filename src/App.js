@@ -19,20 +19,8 @@ function App() {
     .then((workoutData) => setWorkouts(workoutData))
   }, []) 
 
+  const filterWorkouts = workouts.filter((workout) => workout.title.toLowerCase().includes(search.toLowerCase()))
 
-  // create function that deletes workout and updates json data 
-  // create delete request 
-
-  // function onDeleteWorkout(deletedWorkout){
-  //   const filterWorkouts = workouts.filter((workout) => workout.id !== deletedWorkout)  
-  //   setWorkouts(filterWorkouts)
-  // }
-
-  //create new workout
-
-  // function onCreateWorkout(){
-
-  // }
 
   //view exercises within workout card when view button is clicked!!!!
 
@@ -54,7 +42,7 @@ function App() {
     <BrowserRouter>
      <NavBar search={search} setSearch={setSearch}/>
      <Routes>
-        <Route path="/" element={ <HomePage workouts={workouts} search={search} setWorkouts={setWorkouts}/> }/>
+        <Route path="/" element={ <HomePage workouts={filterWorkouts} search={search} setWorkouts={setWorkouts}/> }/>
         <Route path="/login" element={ <Login /> }/>
         <Route path="/signup" element={ <Signup /> }/>
      </Routes>

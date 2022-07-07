@@ -5,7 +5,7 @@ import CardList from './CardList';
 import WorkoutForm from './WorkoutForm';
 // import { create } from '@mui/material/styles/createTransitions';
 
-function HomePage({ setWorkouts, workouts, search }) {
+function HomePage({ setWorkouts, workouts }) {
 
   const [showForm, setShowForm] = useState(false)
 
@@ -26,9 +26,6 @@ function HomePage({ setWorkouts, workouts, search }) {
   }
 
 
-const searchWorkouts = workouts.filter((workout) => workout.title.toLowerCase().includes(search.toLowerCase()))
-
-
 
   return (
     <div>
@@ -39,7 +36,7 @@ const searchWorkouts = workouts.filter((workout) => workout.title.toLowerCase().
             </Button>
         </Box>
         { showForm ? <WorkoutForm workouts={workouts} setWorkouts={setWorkouts}/> : null }
-        <CardList workouts={searchWorkouts} onDeleteWorkout={onDeleteWorkout}/>
+        <CardList workouts={workouts} onDeleteWorkout={onDeleteWorkout}/>
     </div>
   )
 }
