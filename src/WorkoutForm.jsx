@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FormControlUnstyled, {
   useFormControlUnstyledContext,
 } from '@mui/base/FormControlUnstyled';
@@ -6,6 +6,8 @@ import InputUnstyled, { inputUnstyledClasses } from '@mui/base/InputUnstyled';
 import { styled } from '@mui/system';
 import clsx from 'clsx';
 import { Button } from '@mui/material';
+
+const BASE_URL = "http://localhost:9292"
 
 const blue = {
   100: '#DAECFF',
@@ -110,24 +112,72 @@ const HelperText = styled((props) => {
   font-size: 0.875rem;
 `;
 
-function WorkoutForm() {
+function WorkoutForm({ workouts, setWorkouts }) {
+  //add state for the workout form
+  const [title, setTitle] = useState("")
+  const [date, setDate] = useState("")
+  const [level, setLevel] = useState("")
+  // const [submittedData, setSubmittedData] = useState([]);
+
+  function handleTitleChange(event) {
+    setTitle(event.target.value);
+  }
+
+  function handleDateChange(event) {
+    setDate(event.target.value);
+  }
+
+  function handleLevelChange(event){
+    setLevel(event.target.value);
+  }
+
+
+  function handleWorkoutSubmit(e){
+    e.preventDefault();
+
+    const formData = {
+      title: title,
+      date: date,
+      level: level
+    };
+    const dataArray = [...workouts, formData];
+    setWorkouts(dataArray);
+    //what do we do once this data is submitted? 
+    //send the state value of submittedData as a POST request to the correct path
+    fetch(BASE_URL +"/workouts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(workouts),
+    })
+    .then(response => response.json())
+    .then(workoutData => {
+    setWorkouts(workoutData)
+  })
+
+    setTitle("");
+    setDate("");
+    setLevel("");
+  }
+
+
+
 
   return (
-    <div>
-    <FormControlUnstyled defaultValue="" required>
+    <form onSubmit={handleWorkoutSubmit}>
       <Label>Title</Label>
-      <Input />
+      <Input type="text" onChange={handleTitleChange} value={title}/>
       <HelperText />
       <Label>Date</Label>
-      <Input />
+      <Input type="text" onChange={handleDateChange} value={date}/>
       <HelperText />
       <Label>Level</Label>
-      <Input />
+      <Input type="text" onChange={handleLevelChange} value={level}/>
       <HelperText />
-    </FormControlUnstyled>
     <br />
-    <Button variant="contained">Create</Button>
-    </div>
+    <Button variant="contained" type="submit">Submit</Button>
+    </form>
   );
 }
 
