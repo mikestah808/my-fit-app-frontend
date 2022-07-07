@@ -48,7 +48,20 @@ const Search = styled('div')(({ theme }) => ({
     },
   }));
   
-  function SearchBar() {
+  function SearchBar({ search, setSearch }){
+
+
+    function handleSearch(e){
+      // console.log(e.target.value)
+      setSearch(e.target.value)
+      // console.log(search)
+      // setSearch(e.target.value)
+    }
+
+
+
+
+
     return (
       <Box sx={{ flexGrow: 1 }}>
           <Toolbar>
@@ -57,8 +70,12 @@ const Search = styled('div')(({ theme }) => ({
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
+                type="text"
+                id="search"
                 placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
+                // inputProps={{ 'aria-label': 'search' }}
+                value={search}
+                onChange={handleSearch}
               />
             </Search>
           </Toolbar>

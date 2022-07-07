@@ -10,6 +10,9 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
   function handleDeleteClick() {
     fetch(`http://localhost:9292/workouts/${workout.id}`, {
       method: "DELETE",
+      headers: {
+        "Content-type": "application/json"
+      }
     })
       .then((r) => r.json())
       .then((deletedWorkout) => onDeleteWorkout(deletedWorkout));

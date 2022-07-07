@@ -11,6 +11,7 @@ const BASE_URL = "http://localhost:9292"
 
 function App() {
   const [workouts, setWorkouts] = useState([])
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     fetch(BASE_URL + '/workouts')
@@ -21,10 +22,11 @@ function App() {
 
   // create function that deletes workout and updates json data 
   // create delete request 
-  function onDeleteWorkout(deletedWorkout){
-    const filterWorkouts = workouts.filter((workout) => workout.id !== deletedWorkout.id)  
-    setWorkouts(filterWorkouts)
-  }
+
+  // function onDeleteWorkout(deletedWorkout){
+  //   const filterWorkouts = workouts.filter((workout) => workout.id !== deletedWorkout)  
+  //   setWorkouts(filterWorkouts)
+  // }
 
   //create new workout
 
@@ -50,9 +52,9 @@ function App() {
 
   return (
     <BrowserRouter>
-     <NavBar />
+     <NavBar search={search} setSearch={setSearch}/>
      <Routes>
-        <Route path="/" element={ <HomePage onDeleteWorkout={onDeleteWorkout} workouts={workouts}/> }/>
+        <Route path="/" element={ <HomePage workouts={workouts} search={search} setWorkouts={setWorkouts}/> }/>
         <Route path="/login" element={ <Login /> }/>
         <Route path="/signup" element={ <Signup /> }/>
      </Routes>
