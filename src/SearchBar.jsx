@@ -55,11 +55,6 @@ const Search = styled('div')(({ theme }) => ({
       setSearch(event.target.value)
     }
 
-    console.log(search)
-
-
-
-
 
     return (
       <Box sx={{ flexGrow: 1 }}>
