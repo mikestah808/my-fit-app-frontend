@@ -112,13 +112,13 @@ const HelperText = styled((props) => {
   font-size: 0.875rem;
 `;
 
-function WorkoutForm({ workouts, setWorkouts }) {
+function WorkoutForm({ onCreateWorkout }) {
   //add state for the workout form
   const [title, setTitle] = useState("")
   const [date, setDate] = useState("")
   const [level, setLevel] = useState("")
-  // const [submittedData, setSubmittedData] = useState([]);
 
+  
   function handleTitleChange(event) {
     setTitle(event.target.value);
   }
@@ -140,7 +140,6 @@ function WorkoutForm({ workouts, setWorkouts }) {
       date: date,
       level: level
     };
-
     //what do we do once this data is submitted? 
     //send the state value of submittedData as a POST request to the correct path
     fetch(WORKOUTS_URL, {
@@ -151,8 +150,8 @@ function WorkoutForm({ workouts, setWorkouts }) {
   body: JSON.stringify(formData)
 })
 .then(response => response.json())
-.then(workoutData => {
-  setWorkouts(workoutData);
+.then(newWorkout => {
+  onCreateWorkout(newWorkout);
 })
 
     setTitle("");
@@ -166,13 +165,13 @@ function WorkoutForm({ workouts, setWorkouts }) {
 
   return (
     <form onSubmit={handleWorkoutSubmit}>
-      <Label>Title</Label>
+      <Label>Title:</Label>
       <Input type="text" onChange={handleTitleChange} value={title}/>
       <HelperText />
-      <Label>Date</Label>
+      <Label>Date:</Label>
       <Input type="text" onChange={handleDateChange} value={date}/>
       <HelperText />
-      <Label>Level</Label>
+      <Label>Level:</Label>
       <Input type="text" onChange={handleLevelChange} value={level}/>
       <HelperText />
     <br />

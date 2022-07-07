@@ -22,22 +22,6 @@ function App() {
   const filterWorkouts = workouts.filter((workout) => workout.title.toLowerCase().includes(search.toLowerCase()))
 
 
-  //view exercises within workout card when view button is clicked!!!!
-
-
-
-  //edit workout 
-
-  // function onEditWorkout(){
-    
-  // }
-
-
-
-
-
-
-
   return (
     <BrowserRouter>
      <NavBar search={search} setSearch={setSearch}/>

@@ -14,8 +14,9 @@ function WorkoutCard({ workout, onDeleteWorkout }) {
         "Content-type": "application/json"
       }
     })
-      .then((r) => r.json())
-      .then((deletedWorkout) => onDeleteWorkout(deletedWorkout));
+      .then(() => {
+        onDeleteWorkout(workout.id)
+      })
   }
   
   return (

@@ -1,7 +1,7 @@
 import WorkoutCard from './WorkoutCard';
 import React from 'react'
 
-function CardList({ workouts, onDeleteWorkout }) {
+function CardList({ workouts, onDeleteWorkout}) {
 
     const renderWorkouts = workouts.map((workout) => {
         return <WorkoutCard key={workout.id} workout={workout} onDeleteWorkout={onDeleteWorkout}/>

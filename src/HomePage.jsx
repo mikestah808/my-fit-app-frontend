@@ -11,8 +11,8 @@ function HomePage({ setWorkouts, workouts }) {
 
 
 
-  function onDeleteWorkout(deletedWorkout){
-    const filterWorkouts = workouts.filter((workout) => workout.id !== deletedWorkout)  
+  function onDeleteWorkout(deletedWorkoutId){
+    const filterWorkouts = workouts.filter((workout) => workout.id !== deletedWorkoutId)  
     setWorkouts(filterWorkouts)
   }
 
@@ -25,6 +25,11 @@ function HomePage({ setWorkouts, workouts }) {
     //the setter function will be chained to a onChange event handler 
   }
 
+  function onCreateWorkout(newWorkout){
+    const addNewWorkout=[...workouts, newWorkout]
+    setWorkouts(addNewWorkout);
+  }
+
 
 
   return (
@@ -35,7 +40,7 @@ function HomePage({ setWorkouts, workouts }) {
                 Create Workout
             </Button>
         </Box>
-        { showForm ? <WorkoutForm workouts={workouts} setWorkouts={setWorkouts}/> : null }
+        { showForm ? <WorkoutForm workouts={workouts} setWorkouts={setWorkouts} onCreateWorkout={onCreateWorkout}/> : null }
         <CardList workouts={workouts} onDeleteWorkout={onDeleteWorkout}/>
     </div>
   )
