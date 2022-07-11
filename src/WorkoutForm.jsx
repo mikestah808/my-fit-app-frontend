@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FormControlUnstyled, {
   useFormControlUnstyledContext,
 } from '@mui/base/FormControlUnstyled';
@@ -112,13 +112,14 @@ const HelperText = styled((props) => {
   font-size: 0.875rem;
 `;
 
-function WorkoutForm({ onCreateWorkout }) {
+function WorkoutForm({ onCreateWorkout, title, setTitle, date, setDate, level, setLevel}) {
   //add state for the workout form
-  const [title, setTitle] = useState("")
-  const [date, setDate] = useState("")
-  const [level, setLevel] = useState("")
 
-  
+  // const [title, setTitle] = useState("")
+  // const [date, setDate] = useState("")
+  // const [level, setLevel] = useState("")
+
+
   function handleTitleChange(event) {
     setTitle(event.target.value);
   }

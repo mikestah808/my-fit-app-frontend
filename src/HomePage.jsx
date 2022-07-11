@@ -9,6 +9,10 @@ function HomePage({ setWorkouts, workouts }) {
 
   const [showForm, setShowForm] = useState(false)
 
+  const [title, setTitle] = useState("")
+  const [date, setDate] = useState("")
+  const [level, setLevel] = useState("")
+
 
 
   function onDeleteWorkout(deletedWorkoutId){
@@ -30,6 +34,10 @@ function HomePage({ setWorkouts, workouts }) {
     setWorkouts(addNewWorkout);
   }
 
+  function onUpdateWorkout(updatedWorkout){
+    // 
+  }
+
 
 
   return (
@@ -40,8 +48,8 @@ function HomePage({ setWorkouts, workouts }) {
                 Create Workout
             </Button>
         </Box>
-        { showForm ? <WorkoutForm workouts={workouts} setWorkouts={setWorkouts} onCreateWorkout={onCreateWorkout}/> : null }
-        <CardList workouts={workouts} onDeleteWorkout={onDeleteWorkout}/>
+        { showForm ? <WorkoutForm workouts={workouts} setWorkouts={setWorkouts} onCreateWorkout={onCreateWorkout} title={title} setTitle={setTitle} date={date} setDate={setDate} level={level} setLevel={setLevel}/> : null }
+        <CardList workouts={workouts} onDeleteWorkout={onDeleteWorkout} title={title} setTitle={setTitle} date={date} setDate={setDate} level={level} setLevel={setLevel} onUpdateWorkout={onUpdateWorkout}/>
     </div>
   )
 }
