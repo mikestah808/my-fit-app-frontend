@@ -12,13 +12,20 @@ const BASE_URL = "http://localhost:9292"
 
 function App() {
   const [workouts, setWorkouts] = useState([])
+  const [exercises, setExercises] = useState([])
   const [search, setSearch] = useState("")
 
   useEffect(() => {
     fetch(BASE_URL + '/workouts')
     .then((resp) => resp.json())
     .then((workoutData) => setWorkouts(workoutData))
-  }, []) 
+  }, [])
+
+  useEffect(() => {
+    fetch(BASE_URL + '/exercises')
+    .then((resp) => resp.json())
+    .then((exerciseData) => setExercises(exerciseData))
+  },[])
 
   const filterWorkouts = workouts.filter((workout) => workout.title.toLowerCase().includes(search.toLowerCase()))
 
@@ -30,7 +37,7 @@ function App() {
         <Route path="/" element={ <HomePage workouts={filterWorkouts} search={search} setWorkouts={setWorkouts}/> }/>
         <Route path="/login" element={ <Login /> }/>
         <Route path="/signup" element={ <Signup /> }/>
-        <Route path="/exercises" element={ <ExerciseList /> }/>
+        <Route path="/exercises" element={ <ExerciseList exercises={exercises}/> }/>
      </Routes>
     </BrowserRouter>
   );

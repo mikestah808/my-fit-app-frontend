@@ -1,8 +1,17 @@
 import React from 'react'
+import Exercise from './Exercise'
 
-function ExerciseList() {
+function ExerciseList({ exercises }) {
+
+    const renderExercises = exercises.map((exercise) => {
+        return <Exercise key={exercise.id} {...exercise} /> 
+    })
+
+
   return (
-    <div>ExerciseList</div>
+    <div>
+        {renderExercises}
+    </div>
   )
 }
 
