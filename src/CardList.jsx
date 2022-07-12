@@ -1,10 +1,10 @@
 import WorkoutCard from './WorkoutCard';
 import React from 'react'
 
-function CardList({ workouts, onDeleteWorkout, onUpdateWorkout, title, setTitle, date, setDate, level, setLevel}) {
+function CardList({ workouts, editWorkout, setEditWorkout, onDeleteWorkout, handleEditButtonClick, onUpdateWorkout}) {
 
     const renderWorkouts = workouts.map((workout) => {
-        return <WorkoutCard key={workout.id} workout={workout} onDeleteWorkout={onDeleteWorkout} title={title} setTitle={setTitle} date={date} setDate={setDate} level={level} setLevel={setLevel}/>
+        return <WorkoutCard key={workout.id} workout={workout} onDeleteWorkout={onDeleteWorkout} setEditWorkout={setEditWorkout} handleEditButtonClick={handleEditButtonClick} editWorkout={editWorkout} onUpdateWorkout={onUpdateWorkout}/>
     })
 
     // how do i grab the even.target.value within the search input??

@@ -13,20 +13,10 @@ function HomePage({ setWorkouts, workouts }) {
   const [date, setDate] = useState("")
   const [level, setLevel] = useState("")
 
-
-
-  function onDeleteWorkout(deletedWorkoutId){
-    const filterWorkouts = workouts.filter((workout) => workout.id !== deletedWorkoutId)  
-    setWorkouts(filterWorkouts)
-  }
+  const [editWorkout, setEditWorkout] = useState({})
 
   function createWorkoutForm(){
-    // return <WorkoutForm />
     setShowForm((showForm) => !showForm)
-    //create function which will make a form appear 
-    //the form will consist of a title, date, and level input box
-    //the values of input will be tied to state 
-    //the setter function will be chained to a onChange event handler 
   }
 
   function onCreateWorkout(newWorkout){
@@ -34,11 +24,22 @@ function HomePage({ setWorkouts, workouts }) {
     setWorkouts(addNewWorkout);
   }
 
-  function onUpdateWorkout(updatedWorkout){
-    // 
+  function handleEditButtonClick(selectedWorkout){
+    setEditWorkout(selectedWorkout)
   }
 
+ function onUpdateWorkout(updatedWorkout){
+  // check to see if the workout.id matches with the updatedWorkout.id
+  //if it does, thenr return the updatedWorkout object, if not, then keep workout 
+  const updateWorkout = workouts.map((workout) => workout.id === updatedWorkout.id ? updatedWorkout : workout)
+  setWorkouts(updateWorkout)
+ }
 
+
+  function onDeleteWorkout(deletedWorkoutId){
+    const filterWorkouts = workouts.filter((workout) => workout.id !== deletedWorkoutId)  
+    setWorkouts(filterWorkouts)
+  }
 
   return (
     <div>
@@ -49,7 +50,7 @@ function HomePage({ setWorkouts, workouts }) {
             </Button>
         </Box>
         { showForm ? <WorkoutForm workouts={workouts} setWorkouts={setWorkouts} onCreateWorkout={onCreateWorkout} title={title} setTitle={setTitle} date={date} setDate={setDate} level={level} setLevel={setLevel}/> : null }
-        <CardList workouts={workouts} onDeleteWorkout={onDeleteWorkout} title={title} setTitle={setTitle} date={date} setDate={setDate} level={level} setLevel={setLevel} onUpdateWorkout={onUpdateWorkout}/>
+        <CardList editWorkout={editWorkout} setEditWorkout={setEditWorkout} workouts={workouts} onDeleteWorkout={onDeleteWorkout} handleEditButtonClick={handleEditButtonClick} onUpdateWorkout={onUpdateWorkout}/>
     </div>
   )
 }

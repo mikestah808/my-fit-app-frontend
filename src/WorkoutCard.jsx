@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -127,9 +127,15 @@ const HelperText = styled((props) => {
 
 
 
-function WorkoutCard({ workout, onDeleteWorkout, onUpdateWorkout, title, setTitle, date, setDate, level, setLevel }) {
+function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWorkout, setEditWorkout, onUpdateWorkout }) {
+
+  const { title, date, level } = workout
+  const [edit, setEdit] = useState(false)
+
+
 
   function handleDeleteClick() {
+
     fetch(`http://localhost:9292/workouts/${workout.id}`, {
       method: "DELETE",
       headers: {
@@ -142,22 +148,32 @@ function WorkoutCard({ workout, onDeleteWorkout, onUpdateWorkout, title, setTitl
   }
 
 
-  function handleEditClick(e){
-    
-    const formData = {
-      title: title,
-      date: date,
-      level: level
-    }
+  function handleEditClick(){
+
+    setEdit((edit) => !edit)
+
+     // fill in form inputs with key/pair values with object returned from HTTP GET request
+    fetch(`http://localhost:9292/workouts/${workout.id}`)
+    .then((resp) => resp.json())
+    .then((selectedWorkout) => handleEditButtonClick(selectedWorkout));
+  }
+
+  function handleChange(e){
+    setEditWorkout({...editWorkout,[e.target.name]: e.target.value})
+    // console.log(e.target.name)
+    console.log(editWorkout)
+  }
 
 
+
+  function handleEditSubmit(e){
     e.preventDefault();
     fetch(`http://localhost:9292/workouts/${workout.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(editWorkout),
     })
       .then((r) => r.json())
       .then((updatedWorkout) => onUpdateWorkout(updatedWorkout));
@@ -167,13 +183,13 @@ function WorkoutCard({ workout, onDeleteWorkout, onUpdateWorkout, title, setTitl
     <Card sx={{ minWidth: 275 }} variant="outlined">
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {workout.date}
+          {date}
         </Typography>
         <Typography variant="h5" component="div">
-          {workout.title}
+          {title}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Difficulty: {workout.level}
+          Difficulty: {level}
         </Typography>
       </CardContent>
       <CardActions>
@@ -182,19 +198,21 @@ function WorkoutCard({ workout, onDeleteWorkout, onUpdateWorkout, title, setTitl
         <Button onClick={handleDeleteClick} size="small">Delete</Button>
       </CardActions>
       
-      <form>
-      <Label>Title:</Label>
-      <Input type="text"/>
-      <HelperText />
-      <Label>Date:</Label>
-      <Input type="text"/>
-      <HelperText />
-      <Label>Level:</Label>
-      <Input type="text"/>
-      <HelperText />
-    <br />
-    <Button variant="contained" type="submit">Submit</Button>
-    </form>
+    { edit ? (
+       <form onSubmit={handleEditSubmit}>
+       <Label>Title:</Label>
+       <Input type="text" value={editWorkout.title} name="title" onChange={handleChange}/>
+       <HelperText />
+       <Label>Date:</Label>
+       <Input type="text" value={editWorkout.date} name="date" onChange={handleChange}/>
+       <HelperText />
+       <Label>Level:</Label>
+       <Input type="text" value={editWorkout.level} name="level" onChange={handleChange}/>
+       <HelperText />
+     <br />
+     <Button variant="contained" type="submit">Edit Workout</Button>
+     </form>
+    ) : null }
     </Card>
   );
 }
