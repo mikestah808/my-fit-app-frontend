@@ -12,6 +12,8 @@ import InputUnstyled, { inputUnstyledClasses } from '@mui/base/InputUnstyled';
 import { styled } from '@mui/system';
 import clsx from 'clsx';
 import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
+import ExerciseList from './ExerciseList';
 
 
 
@@ -131,6 +133,7 @@ function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWork
 
   const { title, date, level } = workout
   const [edit, setEdit] = useState(false)
+  const [view, setView] = useState(false)
 
 
 
@@ -165,7 +168,6 @@ function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWork
   }
 
 
-
   function handleEditSubmit(e){
     e.preventDefault();
     fetch(`http://localhost:9292/workouts/${workout.id}`, {
@@ -177,6 +179,12 @@ function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWork
     })
       .then((r) => r.json())
       .then((updatedWorkout) => onUpdateWorkout(updatedWorkout));
+  }
+
+  function handleViewClick(){
+    console.log("view my workouts!")
+    //when the view button is clicked, i'd like to be redirected to a exercise list WITH exercises 
+    setView((view) => !view)
   }
   
   return (
@@ -193,7 +201,7 @@ function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWork
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">View</Button>
+        <Button size="small" to="/exercises" component={ Link }>View</Button>
         <Button size="small" onClick={handleEditClick}>Edit</Button>
         <Button onClick={handleDeleteClick} size="small">Delete</Button>
       </CardActions>
@@ -213,6 +221,7 @@ function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWork
      <Button variant="contained" type="submit">Edit Workout</Button>
      </form>
     ) : null }
+
     </Card>
   );
 }

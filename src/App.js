@@ -5,6 +5,7 @@ import HomePage from './HomePage';
 import NavBar from './Navbar'
 import Signup from './authentication/Signup';
 import Login from './authentication/Login';
+import ExerciseList from './ExerciseList';
 
 
 const BASE_URL = "http://localhost:9292"
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={ <HomePage workouts={filterWorkouts} search={search} setWorkouts={setWorkouts}/> }/>
         <Route path="/login" element={ <Login /> }/>
         <Route path="/signup" element={ <Signup /> }/>
+        <Route path="/exercises" element={ <ExerciseList /> }/>
      </Routes>
     </BrowserRouter>
   );
