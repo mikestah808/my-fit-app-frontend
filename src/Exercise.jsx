@@ -1,11 +1,9 @@
 import React from 'react'
 
-function Exercise({ name, primary_muscle, sets, reps, category }) {
+function Exercise() {
   return (
-    <div>
-        <h1>{name}</h1>
-    </div>
+    <div>Exercise</div>
   )
 }
 
-export default Exercise
+export default Exercise;
