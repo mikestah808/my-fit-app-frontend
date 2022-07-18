@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import CardList from './CardList';
 import WorkoutForm from './WorkoutForm';
-// import { create } from '@mui/material/styles/createTransitions';
 
 function HomePage({ setWorkouts, workouts }) {
 
@@ -46,7 +45,7 @@ function HomePage({ setWorkouts, workouts }) {
         <h1>Welcome to MY FIT! The best workout tracker out there!</h1>
         <Box textAlign='center'>
             <Button variant='contained' onClick={createWorkoutForm}>
-                Create Workout
+                Add Workout
             </Button>
         </Box>
         { showForm ? <WorkoutForm workouts={workouts} setWorkouts={setWorkouts} onCreateWorkout={onCreateWorkout} title={title} setTitle={setTitle} date={date} setDate={setDate} level={level} setLevel={setLevel}/> : null }
