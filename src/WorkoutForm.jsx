@@ -113,11 +113,6 @@ const HelperText = styled((props) => {
 `;
 
 function WorkoutForm({ onCreateWorkout, title, setTitle, date, setDate, level, setLevel}) {
-  //add state for the workout form
-
-  // const [title, setTitle] = useState("")
-  // const [date, setDate] = useState("")
-  // const [level, setLevel] = useState("")
 
 
   function handleTitleChange(event) {
@@ -143,17 +138,20 @@ function WorkoutForm({ onCreateWorkout, title, setTitle, date, setDate, level, s
     };
     //what do we do once this data is submitted? 
     //send the state value of submittedData as a POST request to the correct path
-    fetch(WORKOUTS_URL, {
-    method: 'POST',
-    headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(formData)
-})
-.then(response => response.json())
-.then(newWorkout => {
-  onCreateWorkout(newWorkout);
-})
+    
+    if(formData.title !== "" && formData.level !== ""){
+      fetch(WORKOUTS_URL, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(newWorkout => onCreateWorkout(newWorkout));
+    } else {
+      alert("you forgot something!")
+    }
 
     setTitle("");
     setDate("");

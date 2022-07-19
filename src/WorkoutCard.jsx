@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-// import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import FormControlUnstyled, {
@@ -13,7 +12,6 @@ import { styled } from '@mui/system';
 import clsx from 'clsx';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import ExerciseList from './ExerciseList';
 
 
 
@@ -133,7 +131,7 @@ function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWork
 
   const { title, date, level } = workout
   const [edit, setEdit] = useState(false)
-  const [view, setView] = useState(false)
+  // const [view, setView] = useState(false)
 
 
 
@@ -181,11 +179,11 @@ function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWork
       .then((updatedWorkout) => onUpdateWorkout(updatedWorkout));
   }
 
-  function handleViewClick(){
-    console.log("view my workouts!")
-    //when the view button is clicked, i'd like to be redirected to a exercise list WITH exercises 
-    setView((view) => !view)
-  }
+  // function handleViewClick(){
+  //   console.log("view my workouts!")
+  //   //when the view button is clicked, i'd like to be redirected to a exercise list WITH exercises 
+  //   setView((view) => !view)
+  // }
   
   return (
     <Card sx={{ minWidth: 275 }} variant="outlined">
