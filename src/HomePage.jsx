@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import CardList from './CardList';
+import WorkoutList from './WorkoutList';
 import WorkoutForm from './WorkoutForm';
 
 function HomePage({ setWorkouts, workouts }) {
@@ -13,6 +13,7 @@ function HomePage({ setWorkouts, workouts }) {
   const [level, setLevel] = useState("")
 
   const [editWorkout, setEditWorkout] = useState({})
+
 
   function createWorkoutForm(){
     setShowForm((showForm) => !showForm)
@@ -49,7 +50,7 @@ function HomePage({ setWorkouts, workouts }) {
             </Button>
         </Box>
         { showForm ? <WorkoutForm workouts={workouts} setWorkouts={setWorkouts} onCreateWorkout={onCreateWorkout} title={title} setTitle={setTitle} date={date} setDate={setDate} level={level} setLevel={setLevel}/> : null }
-        <CardList editWorkout={editWorkout} setEditWorkout={setEditWorkout} workouts={workouts} onDeleteWorkout={onDeleteWorkout} handleEditButtonClick={handleEditButtonClick} onUpdateWorkout={onUpdateWorkout}/>
+        <WorkoutList editWorkout={editWorkout} setEditWorkout={setEditWorkout} workouts={workouts} onDeleteWorkout={onDeleteWorkout} handleEditButtonClick={handleEditButtonClick} onUpdateWorkout={onUpdateWorkout}/>
     </div>
   )
 }

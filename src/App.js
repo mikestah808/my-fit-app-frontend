@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import NavBar from './Navbar'
-import Signup from './authentication/Signup';
-import Login from './authentication/Login';
-import ExerciseList from './ExerciseList';
+import Workout from './Workout';
+import WorkoutDetail from './WorkoutDetail';
+// import Exercise from './Exercise';
+// import WorkoutList from './WorkoutList';
 
 
 const BASE_URL = "http://localhost:9292"
@@ -14,7 +15,6 @@ function App() {
   const [workouts, setWorkouts] = useState([])
   const [exercises, setExercises] = useState([])
   const [search, setSearch] = useState("")
-  // const [filteredWorkouts, setFilteredWorkout] = useState([])
 
 useEffect(() => {
   fetch(BASE_URL + '/workouts')
@@ -23,20 +23,7 @@ useEffect(() => {
 }, [])
   
 
-  // useEffect(() => {
-  //   fetch(BASE_URL + '/workouts')
-  //   .then((resp) => resp.json())
-  //   .then((workoutData) => {
-  //     if(search !== ""){
-  //       const noNulls = workoutData.filter(element => element.title !== null)
-  //       setFilteredWorkout(noNulls.filter((workout) => workout.title.toLowerCase().includes(search.toLowerCase())))
-  //     } else{
-  //       setFilteredWorkout(workoutData)
-  //     }
-  //   })
-  // }, [search])
-
-  useEffect(() => {
+useEffect(() => {
     fetch(BASE_URL + '/exercises')
     .then((resp) => resp.json())
     .then((exerciseData) => setExercises(exerciseData))
@@ -51,9 +38,8 @@ useEffect(() => {
      <NavBar search={search} setSearch={setSearch}/>
      <Routes>
         <Route path="/" element={ <HomePage workouts={filterWorkouts} search={search} setWorkouts={setWorkouts}/> }/>
-        <Route path="/login" element={ <Login /> }/>
-        <Route path="/signup" element={ <Signup /> }/>
-        <Route path="/exercises" element={ <ExerciseList exercises={exercises} /> }/>
+        <Route path="/workouts/:id" element={ <WorkoutDetail workouts={workouts}/> }/>
+        {/* <Route path="/workouts/:id/exercises" element={ <Exercise /> } /> */}
      </Routes>
     </BrowserRouter>
   );

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -12,6 +13,7 @@ import { styled } from '@mui/system';
 import clsx from 'clsx';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import Exercise from './Exercises';
 
 
 
@@ -127,16 +129,31 @@ const HelperText = styled((props) => {
 
 
 
-function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWorkout, setEditWorkout, onUpdateWorkout }) {
+function Workout({ workout, onDeleteWorkout, handleEditButtonClick, editWorkout, setEditWorkout, onUpdateWorkout }) {
 
   const { title, date, level } = workout
   const [edit, setEdit] = useState(false)
-  // const [view, setView] = useState(false)
+  
+//   const [exercisesInWorkout, setExercisesInWorkout] = useState({
+//     exercises: []
+//   })
+
+//   const params = useParams();
+
+//   //create useEffect function which will grab the exercises within the workouts through fetch request 
+
+//  useEffect(() => {
+
+//   fetch(`http://localhost:9292/workouts/${workout.id}`)
+//   .then((res) => res.json())
+//   .then(data => {
+//     setExercisesInWorkout(data)
+//     })
+// }, [])
 
 
 
   function handleDeleteClick() {
-
     fetch(`http://localhost:9292/workouts/${workout.id}`, {
       method: "DELETE",
       headers: {
@@ -150,9 +167,7 @@ function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWork
 
 
   function handleEditClick(){
-
     setEdit((edit) => !edit)
-
      // fill in form inputs with key/pair values with object returned from HTTP GET request
     fetch(`http://localhost:9292/workouts/${workout.id}`)
     .then((resp) => resp.json())
@@ -161,7 +176,6 @@ function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWork
 
   function handleChange(e){
     setEditWorkout({...editWorkout,[e.target.name]: e.target.value})
-    // console.log(e.target.name)
     console.log(editWorkout)
   }
 
@@ -178,12 +192,6 @@ function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWork
       .then((r) => r.json())
       .then((updatedWorkout) => onUpdateWorkout(updatedWorkout));
   }
-
-  // function handleViewClick(){
-  //   console.log("view my workouts!")
-  //   //when the view button is clicked, i'd like to be redirected to a exercise list WITH exercises 
-  //   setView((view) => !view)
-  // }
   
   return (
     <Card sx={{ minWidth: 275 }} variant="outlined">
@@ -199,7 +207,8 @@ function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWork
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" to="/exercises" component={ Link }>View</Button>
+        {/* unsure if this is the right link? check with instructor */}
+        <Button size="small" to={`workouts/${workout.id}`} component={ Link }>View</Button>
         <Button size="small" onClick={handleEditClick}>Edit</Button>
         <Button onClick={handleDeleteClick} size="small">Delete</Button>
       </CardActions>
@@ -225,4 +234,4 @@ function WorkoutCard({ workout, onDeleteWorkout, handleEditButtonClick, editWork
 }
 
 
-export default WorkoutCard;
+export default Workout;

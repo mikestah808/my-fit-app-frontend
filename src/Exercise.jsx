@@ -1,9 +1,15 @@
 import React from 'react'
 
-function Exercise() {
+function Exercise({ exercise }) {
+
+    const {name} = exercise
+    
+
   return (
-    <div>Exercise</div>
+    <div>
+        <h2>{name}</h2>
+    </div>
   )
 }
 
-export default Exercise;
+export default Exercise
