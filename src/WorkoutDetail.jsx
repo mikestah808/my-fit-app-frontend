@@ -1,22 +1,26 @@
 import React from 'react'
-import Exercise from './Exercises';
+import Exercises from './Exercises';
 import { useParams } from 'react-router-dom';
 
-function WorkoutDetail({ workouts }) {
+function WorkoutDetail({ workouts, setExercises, exercises }) {
+
 
   // Get the userId param from the URL.
   const { id } = useParams();
 
     
-const filterWorkouts = workouts.filter(workout => workout.id == id)
+const selectedWorkout = workouts.filter(workout => workout.id == id)
 
-// console.log("filter workouts", filterWorkouts)
+// function onCreateExercise(newExercise){
+//   const addNewExercise = [...exercises, newExercise]
+//   setExercises(addNewExercise)
+// }
 
 // const printTitle = filterWorkouts.map((workout) => workout.title)
-const renderExercises = filterWorkouts.map((workout) => {
+const renderExercises = selectedWorkout.map((workout) => {
 
   return (
-    <Exercise key={workout.id} exercises = {workout.exercises} />
+    <Exercises workout={workout} key={workout.id} exercises={workout.exercises} setExercises={setExercises}/>
   )
 })
 

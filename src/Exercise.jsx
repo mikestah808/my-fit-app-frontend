@@ -14,9 +14,23 @@ const bull = (
   </Box>
 );
 
-function Exercise({ exercise }) {
+function Exercise({ exercise, onDeleteExercise }) {
 
   const { name, primary_muscle, category, sets, reps } = exercise
+
+
+
+  function handleDeleteClick() {
+    fetch(`http://localhost:9292/exercises/${exercise.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json"
+      }
+    })
+      .then(() => {
+        onDeleteExercise(exercise.id)
+      })
+  }
 
 
   return (
@@ -36,7 +50,7 @@ function Exercise({ exercise }) {
           Primary Muscle: {primary_muscle}
         </Typography>
         <br/>
-        <Button size="small">Delete</Button>
+        <Button size="small" onClick={handleDeleteClick}>Delete</Button>
       </CardContent>
     </Card>
     </>

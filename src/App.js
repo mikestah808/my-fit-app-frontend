@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import NavBar from './Navbar'
-import Workout from './Workout';
+// import Workout from './Workout';
 import WorkoutDetail from './WorkoutDetail';
 // import Exercise from './Exercise';
 // import WorkoutList from './WorkoutList';
@@ -38,7 +38,7 @@ useEffect(() => {
      <NavBar search={search} setSearch={setSearch}/>
      <Routes>
         <Route path="/" element={ <HomePage workouts={filterWorkouts} search={search} setWorkouts={setWorkouts}/> }/>
-        <Route path="/workouts/:id" element={ <WorkoutDetail workouts={workouts}/> }/>
+        <Route path="/workouts/:id" element={ <WorkoutDetail workouts={workouts} exercises={exercises} setExercises={setExercises}/> }/>
         {/* <Route path="/workouts/:id/exercises" element={ <Exercise /> } /> */}
      </Routes>
     </BrowserRouter>

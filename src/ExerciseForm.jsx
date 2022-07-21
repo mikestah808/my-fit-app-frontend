@@ -7,8 +7,6 @@ import { styled } from '@mui/system';
 import clsx from 'clsx';
 import { Button } from '@mui/material';
 
-const WORKOUTS_URL = "http://localhost:9292/exercises"
-
 const blue = {
   100: '#DAECFF',
   200: '#80BFFF',
@@ -112,7 +110,9 @@ const HelperText = styled((props) => {
   font-size: 0.875rem;
 `;
 
-function ExerciseForm({ name, setName, muscle, setMuscle, category, setCategory, sets, setSets, reps, setReps }) {
+function ExerciseForm({ onCreateExercise, workout, name, setName, muscle, setMuscle, category, setCategory, sets, setSets, reps, setReps }) {
+
+  const EXERCISES_URL = `http://localhost:9292/workouts/${workout.id}/exercises`
 
 
   function handleNameChange(event) {
@@ -149,8 +149,8 @@ function ExerciseForm({ name, setName, muscle, setMuscle, category, setCategory,
     //what do we do once this data is submitted? 
     //send the state value of submittedData as a POST request to the correct path
     
-    if(formData.name !== "" && formData.muscle !== "" && formData.category !== "" && formData.sets !== "" && formData.reps !== ""){
-      fetch(WORKOUTS_URL, {
+    if(formData.name !== "" && formData.muscle !== "" && formData.category !== "" && formData.sets !== 0 && formData.reps !== 0){
+      fetch(EXERCISES_URL, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
@@ -158,7 +158,7 @@ function ExerciseForm({ name, setName, muscle, setMuscle, category, setCategory,
       body: JSON.stringify(formData)
     })
     .then(response => response.json())
-    .then(newExercise => console.log(newExercise));
+    .then(newExercise => onCreateExercise(newExercise));
     } else {
       alert("you forgot something!")
     }
@@ -166,12 +166,11 @@ function ExerciseForm({ name, setName, muscle, setMuscle, category, setCategory,
     setName("");
     setMuscle("");
     setCategory("");
-    setSets("");
-    setReps("");
+    setSets(0);
+    setReps(0);
   }
 
-//if the formData input values are not all filled out, then throw out error 
-//else, do the POST request 
+//once form is submitted, how will the exercise form be tied to the same workout id? 
 
 
   return (
@@ -186,10 +185,10 @@ function ExerciseForm({ name, setName, muscle, setMuscle, category, setCategory,
       <Input type="text" onChange={handleCategoryChange} value={category}/>
       <HelperText />
       <Label>Sets:</Label>
-      <Input type="text" onChange={handleSetsChange} value={sets}/>
+      <Input type="number" onChange={handleSetsChange} value={sets}/>
       <HelperText />
       <Label>Reps:</Label>
-      <Input type="text" onChange={handleRepsChange} value={reps}/>
+      <Input type="number" onChange={handleRepsChange} value={reps}/>
       <HelperText />
     <br />
     <Button variant="contained" type="submit">Submit</Button>

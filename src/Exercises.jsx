@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import { Box } from '@mui/system';
 import ExerciseForm from './ExerciseForm'
 
-function Exercises({ exercises }) {
+function Exercises({ exercises, workout, setExercises }) {
 
   const [name, setName] = useState("")
   const [muscle, setMuscle] = useState("")
@@ -14,9 +14,21 @@ function Exercises({ exercises }) {
 
   const [showForm, setShowForm] = useState(false)
 
+  console.log("exercises", exercises)
+
+  function onCreateExercise(newExercise){
+    const addNewExercise = [...exercises, newExercise]
+    setExercises(addNewExercise)
+  }
+
+  function onDeleteExercise(deletedExerciseId){
+    const filterExercises = exercises.filter((exercise) => exercise.id !== deletedExerciseId)  
+    setExercises(filterExercises)
+  }
+
     const renderExercises = exercises.map((exercise) => {
         return (
-          <Exercise key={exercise.id} exercise={exercise}/>
+          <Exercise key={exercise.id} exercise={exercise} onDeleteExercise={onDeleteExercise}/>
         )
     })
 
@@ -25,11 +37,12 @@ function Exercises({ exercises }) {
     }
 
 
+
   return (
     <Box textAlign='center'>
     <h1>Exercises</h1>
     <Button variant="contained" size="small" align="center" onClick={showExerciseForm}>Add Exercise</Button>
-    { showForm ? <ExerciseForm name={name} setName={setName} muscle={muscle} setMuscle={setMuscle} category={category} setCategory={setCategory} sets={sets} setSets={setSets} reps={reps} setReps={setReps}/> : null }
+    { showForm ? <ExerciseForm onCreateExercise={onCreateExercise} workout={workout} name={name} setName={setName} muscle={muscle} setMuscle={setMuscle} category={category} setCategory={setCategory} sets={sets} setSets={setSets} reps={reps} setReps={setReps}/> : null }
 
     <div>{renderExercises}</div>
     </Box>
