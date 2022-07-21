@@ -19,7 +19,7 @@ import SearchBar from './SearchBar';
           </Typography>
           <Box>
             <Button variant="" to="/" component={ Link }>Home</Button>
-            <Button variant="" to="/workouts" component={ Link }>Workouts</Button>
+            {/* <Button variant="" to="/workouts" component={ Link }>Workouts</Button> */}
             {/* <Button variant="" to="/login" component={ Link }>Login</Button>
             <Button variant="" to="/signup" component={ Link }>Sign Up</Button> */}
           </Box>

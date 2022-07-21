@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Exercise from './Exercise'
 import { Button } from '@mui/material';
 import { Box } from '@mui/system';
+import ExerciseForm from './ExerciseForm'
 
 function Exercises({ exercises }) {
 
-    console.log("exercises", exercises)
+  const [showForm, setShowForm] = useState(false)
 
     const renderExercises = exercises.map((exercise) => {
         return (
@@ -13,10 +14,16 @@ function Exercises({ exercises }) {
         )
     })
 
+    function showExerciseForm(){
+      setShowForm((showForm) => !showForm)
+    }
+
+
   return (
     <Box textAlign='center'>
     <h1>Exercises</h1>
-    <Button size="small" align="center">Add Exercise</Button>
+    <Button variant="contained" size="small" align="center" onClick={showExerciseForm}>Add Exercise</Button>
+    { showForm ? <ExerciseForm /> : null }
     <div>{renderExercises}</div>
     </Box>
   )

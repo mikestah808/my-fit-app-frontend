@@ -43,9 +43,9 @@ function HomePage({ setWorkouts, workouts }) {
 
   return (
     <div>
-        <h1>Welcome to MY FIT! The best workout tracker out there!</h1>
+        <h1>MY FIT Workout Tracker</h1>
         <Box textAlign='center'>
-            <Button variant='contained' onClick={createWorkoutForm}>
+            <Button variant='contained' size="small" onClick={createWorkoutForm}>
                 Add Workout
             </Button>
         </Box>
