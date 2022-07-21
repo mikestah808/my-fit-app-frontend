@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Exercise from './Exercises';
 import { useParams } from 'react-router-dom';
 
 function WorkoutDetail({ workouts }) {
 
-  // const [exercises, setExercises] = useState([])
-
+  // Get the userId param from the URL.
   const { id } = useParams();
 
     

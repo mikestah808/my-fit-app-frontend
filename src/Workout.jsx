@@ -13,7 +13,6 @@ import { styled } from '@mui/system';
 import clsx from 'clsx';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import Exercise from './Exercises';
 
 
 

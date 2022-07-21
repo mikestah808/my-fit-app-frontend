@@ -1,5 +1,7 @@
 import React from 'react'
 import Exercise from './Exercise'
+import { Button } from '@mui/material';
+import { Box } from '@mui/system';
 
 function Exercises({ exercises }) {
 
@@ -12,10 +14,11 @@ function Exercises({ exercises }) {
     })
 
   return (
-    <>
+    <Box textAlign='center'>
     <h1>Exercises</h1>
+    <Button size="small" align="center">Add Exercise</Button>
     <div>{renderExercises}</div>
-    </>
+    </Box>
   )
 }
 
