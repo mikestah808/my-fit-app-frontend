@@ -112,15 +112,11 @@ const HelperText = styled((props) => {
   font-size: 0.875rem;
 `;
 
-function WorkoutForm({ onCreateWorkout, title, setTitle, date, setDate, level, setLevel}) {
+function WorkoutForm({ onCreateWorkout, title, setTitle, level, setLevel}) {
 
 
   function handleTitleChange(event) {
     setTitle(event.target.value);
-  }
-
-  function handleDateChange(event) {
-    setDate(event.target.value);
   }
 
   function handleLevelChange(event){
@@ -133,13 +129,13 @@ function WorkoutForm({ onCreateWorkout, title, setTitle, date, setDate, level, s
 
     const formData = {
       title: title,
-      date: date,
       level: level
     };
     //what do we do once this data is submitted? 
     //send the state value of submittedData as a POST request to the correct path
     
     if(formData.title !== "" && formData.level !== ""){
+      // debugger;
       fetch(WORKOUTS_URL, {
         method: 'POST',
         headers: {
@@ -154,7 +150,6 @@ function WorkoutForm({ onCreateWorkout, title, setTitle, date, setDate, level, s
     }
 
     setTitle("");
-    setDate("");
     setLevel("");
   }
 
@@ -166,9 +161,6 @@ function WorkoutForm({ onCreateWorkout, title, setTitle, date, setDate, level, s
     <form onSubmit={handleWorkoutSubmit}>
       <Label>Title:</Label>
       <Input type="text" onChange={handleTitleChange} value={title}/>
-      <HelperText />
-      <Label>Date:</Label>
-      <Input type="text" onChange={handleDateChange} value={date}/>
       <HelperText />
       <Label>Level:</Label>
       <Input type="text" onChange={handleLevelChange} value={level}/>

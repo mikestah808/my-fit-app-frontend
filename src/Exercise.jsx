@@ -16,7 +16,7 @@ const bull = (
 
 function Exercise({ exercise, onDeleteExercise }) {
 
-  const { name, primary_muscle, category, sets, reps } = exercise
+  const { name, category, sets, reps } = exercise
 
 
 
@@ -41,13 +41,10 @@ function Exercise({ exercise, onDeleteExercise }) {
           Category: {category}
         </Typography>
         <Typography variant="h5" component="div">
-           Exercise: {name}
+           {name}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           Sets: {sets} Reps: {reps}
-        </Typography>
-        <Typography variant="body2">
-          Primary Muscle: {primary_muscle}
         </Typography>
         <br/>
         <Button size="small" onClick={handleDeleteClick}>Delete</Button>

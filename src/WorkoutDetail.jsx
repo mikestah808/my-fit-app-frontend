@@ -2,7 +2,7 @@ import React from 'react'
 import Exercises from './Exercises';
 import { useParams } from 'react-router-dom';
 
-function WorkoutDetail({ workouts, setExercises, exercises }) {
+function WorkoutDetail({ workouts, setExercises }) {
 
 
   // Get the userId param from the URL.

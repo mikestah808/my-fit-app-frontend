@@ -7,6 +7,10 @@ import { styled } from '@mui/system';
 import clsx from 'clsx';
 import { Button } from '@mui/material';
 
+
+const EXERCISES_URL = "http://localhost:9292/workouts";
+
+
 const blue = {
   100: '#DAECFF',
   200: '#80BFFF',
@@ -110,17 +114,13 @@ const HelperText = styled((props) => {
   font-size: 0.875rem;
 `;
 
-function ExerciseForm({ onCreateExercise, workout, name, setName, muscle, setMuscle, category, setCategory, sets, setSets, reps, setReps }) {
+function ExerciseForm({ onCreateExercise, workout, name, setName, category, setCategory, sets, setSets, reps, setReps }) {
 
-  const EXERCISES_URL = `http://localhost:9292/workouts/${workout.id}/exercises`
+  // const EXERCISES_URL = `http://localhost:9292/workouts/${workout.id}/exercises`;
 
 
   function handleNameChange(event) {
     setName(event.target.value);
-  }
-
-  function handleMuscleChange(event) {
-    setMuscle(event.target.value);
   }
 
   function handleCategoryChange(event){
@@ -141,7 +141,6 @@ function ExerciseForm({ onCreateExercise, workout, name, setName, muscle, setMus
 
     const formData = {
       name: name,
-      muscle: muscle,
       category: category,
       sets: sets,
       reps: reps
@@ -149,8 +148,8 @@ function ExerciseForm({ onCreateExercise, workout, name, setName, muscle, setMus
     //what do we do once this data is submitted? 
     //send the state value of submittedData as a POST request to the correct path
     
-    if(formData.name !== "" && formData.muscle !== "" && formData.category !== "" && formData.sets !== 0 && formData.reps !== 0){
-      fetch(EXERCISES_URL, {
+    if(formData.name !== "" && formData.category !== "" && formData.sets !== 0 && formData.reps !== 0){
+      fetch(EXERCISES_URL+`/${workout.id}/exercises`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
@@ -164,7 +163,6 @@ function ExerciseForm({ onCreateExercise, workout, name, setName, muscle, setMus
     }
 
     setName("");
-    setMuscle("");
     setCategory("");
     setSets(0);
     setReps(0);
@@ -177,9 +175,6 @@ function ExerciseForm({ onCreateExercise, workout, name, setName, muscle, setMus
     <form onSubmit={handleWorkoutSubmit}>
       <Label>Name:</Label>
       <Input type="text" onChange={handleNameChange} value={name}/>
-      <HelperText />
-      <Label>Muscle:</Label>
-      <Input type="text" onChange={handleMuscleChange} value={muscle}/>
       <HelperText />
       <Label>Category:</Label>
       <Input type="text" onChange={handleCategoryChange} value={category}/>

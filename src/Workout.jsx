@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -128,29 +127,10 @@ const HelperText = styled((props) => {
 
 
 
-function Workout({ workout, onDeleteWorkout, handleEditButtonClick, editWorkout, setEditWorkout, onUpdateWorkout }) {
+function Workout({ workout, onDeleteWorkout, handleEditButtonClick, editWorkout, setEditWorkout, onUpdateWorkout, setTitle, setLevel }) {
 
-  const { title, date, level } = workout
+  const { title, level } = workout
   const [edit, setEdit] = useState(false)
-  
-//   const [exercisesInWorkout, setExercisesInWorkout] = useState({
-//     exercises: []
-//   })
-
-//   const params = useParams();
-
-//   //create useEffect function which will grab the exercises within the workouts through fetch request 
-
-//  useEffect(() => {
-
-//   fetch(`http://localhost:9292/workouts/${workout.id}`)
-//   .then((res) => res.json())
-//   .then(data => {
-//     setExercisesInWorkout(data)
-//     })
-// }, [])
-
-
 
   function handleDeleteClick() {
     fetch(`http://localhost:9292/workouts/${workout.id}`, {
@@ -175,7 +155,6 @@ function Workout({ workout, onDeleteWorkout, handleEditButtonClick, editWorkout,
 
   function handleChange(e){
     setEditWorkout({...editWorkout,[e.target.name]: e.target.value})
-    console.log(editWorkout)
   }
 
 
@@ -190,14 +169,15 @@ function Workout({ workout, onDeleteWorkout, handleEditButtonClick, editWorkout,
     })
       .then((r) => r.json())
       .then((updatedWorkout) => onUpdateWorkout(updatedWorkout));
+
+      setTitle("");
+      setLevel("");
+
   }
   
   return (
     <Card sx={{ minWidth: 275 }} variant="outlined">
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {date}
-        </Typography>
         <Typography variant="h5" component="div">
           {title}
         </Typography>
@@ -206,7 +186,6 @@ function Workout({ workout, onDeleteWorkout, handleEditButtonClick, editWorkout,
         </Typography>
       </CardContent>
       <CardActions>
-        {/* unsure if this is the right link? check with instructor */}
         <Button size="small" to={`workouts/${workout.id}`} component={ Link }>View</Button>
         <Button size="small" onClick={handleEditClick}>Edit</Button>
         <Button onClick={handleDeleteClick} size="small">Delete</Button>
@@ -216,9 +195,6 @@ function Workout({ workout, onDeleteWorkout, handleEditButtonClick, editWorkout,
        <form onSubmit={handleEditSubmit}>
        <Label>Title:</Label>
        <Input type="text" value={editWorkout.title} name="title" onChange={handleChange}/>
-       <HelperText />
-       <Label>Date:</Label>
-       <Input type="text" value={editWorkout.date} name="date" onChange={handleChange}/>
        <HelperText />
        <Label>Level:</Label>
        <Input type="text" value={editWorkout.level} name="level" onChange={handleChange}/>

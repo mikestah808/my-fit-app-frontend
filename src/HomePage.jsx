@@ -9,7 +9,6 @@ function HomePage({ setWorkouts, workouts }) {
   const [showForm, setShowForm] = useState(false)
 
   const [title, setTitle] = useState("")
-  const [date, setDate] = useState("")
   const [level, setLevel] = useState("")
 
   const [editWorkout, setEditWorkout] = useState({})
@@ -30,7 +29,7 @@ function HomePage({ setWorkouts, workouts }) {
 
  function onUpdateWorkout(updatedWorkout){
   // check to see if the workout.id matches with the updatedWorkout.id
-  //if it does, thenr return the updatedWorkout object, if not, then keep workout 
+  //if it does, then return the updatedWorkout object, if not, then keep workout 
   const updateWorkout = workouts.map((workout) => workout.id === updatedWorkout.id ? updatedWorkout : workout)
   setWorkouts(updateWorkout)
  }
@@ -49,8 +48,8 @@ function HomePage({ setWorkouts, workouts }) {
                 Add Workout
             </Button>
         </Box>
-        { showForm ? <WorkoutForm workouts={workouts} setWorkouts={setWorkouts} onCreateWorkout={onCreateWorkout} title={title} setTitle={setTitle} date={date} setDate={setDate} level={level} setLevel={setLevel}/> : null }
-        <WorkoutList editWorkout={editWorkout} setEditWorkout={setEditWorkout} workouts={workouts} onDeleteWorkout={onDeleteWorkout} handleEditButtonClick={handleEditButtonClick} onUpdateWorkout={onUpdateWorkout}/>
+        { showForm ? <WorkoutForm workouts={workouts} setWorkouts={setWorkouts} onCreateWorkout={onCreateWorkout} title={title} setTitle={setTitle} level={level} setLevel={setLevel}/> : null }
+        <WorkoutList editWorkout={editWorkout} setEditWorkout={setEditWorkout} workouts={workouts} onDeleteWorkout={onDeleteWorkout} handleEditButtonClick={handleEditButtonClick} onUpdateWorkout={onUpdateWorkout} setTitle={setTitle} setLevel={setLevel}/>
     </div>
   )
 }
