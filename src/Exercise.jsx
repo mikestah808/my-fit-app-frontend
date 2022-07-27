@@ -14,21 +14,17 @@ const bull = (
   </Box>
 );
 
-function Exercise({ exercise, onDeleteExercise }) {
-
-  const { name, category, sets, reps } = exercise
-
-
-
+function Exercise({ id, name, category, sets, reps, onDeleteExercise }) {
+  
   function handleDeleteClick() {
-    fetch(`http://localhost:9292/exercises/${exercise.id}`, {
+    fetch(`http://localhost:9292/exercises/${id}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json"
       }
     })
       .then(() => {
-        onDeleteExercise(exercise.id)
+        onDeleteExercise(id)
       })
   }
 

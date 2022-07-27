@@ -8,7 +8,7 @@ import clsx from 'clsx';
 import { Button } from '@mui/material';
 
 
-const EXERCISES_URL = "http://localhost:9292/workouts";
+const WORKOUT_URL = "http://localhost:9292/workouts";
 
 
 const blue = {
@@ -114,9 +114,7 @@ const HelperText = styled((props) => {
   font-size: 0.875rem;
 `;
 
-function ExerciseForm({ onCreateExercise, workout, name, setName, category, setCategory, sets, setSets, reps, setReps }) {
-
-  // const EXERCISES_URL = `http://localhost:9292/workouts/${workout.id}/exercises`;
+function ExerciseForm({ click, setClick, onCreateExercise, workout, exercises, name, setName, category, setCategory, sets, setSets, reps, setReps }) {
 
 
   function handleNameChange(event) {
@@ -148,8 +146,22 @@ function ExerciseForm({ onCreateExercise, workout, name, setName, category, setC
     //what do we do once this data is submitted? 
     //send the state value of submittedData as a POST request to the correct path
     
+    // if(formData.name !== "" && formData.category !== "" && formData.sets !== 0 && formData.reps !== 0){
+    //   fetch(EXERCISES_URL+`/${workout.id}/exercises`, {
+    //     method: 'POST',
+    //     headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(formData)
+    // })
+    // .then(response => response.json())
+    // .then(newExercise => onCreateExercise(newExercise));
+    // } else {
+    //   alert("you forgot something!")
+    // }
+
     if(formData.name !== "" && formData.category !== "" && formData.sets !== 0 && formData.reps !== 0){
-      fetch(EXERCISES_URL+`/${workout.id}/exercises`, {
+      fetch(WORKOUT_URL+`/${workout.id}/exercises`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
@@ -166,6 +178,7 @@ function ExerciseForm({ onCreateExercise, workout, name, setName, category, setC
     setCategory("");
     setSets(0);
     setReps(0);
+    setClick(!click)
   }
 
 //once form is submitted, how will the exercise form be tied to the same workout id? 

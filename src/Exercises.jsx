@@ -1,48 +1,38 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Exercise from './Exercise'
-import { Button } from '@mui/material';
+// import { Button } from '@mui/material';
 import { Box } from '@mui/system';
-import ExerciseForm from './ExerciseForm'
+// import ExerciseForm from './ExerciseForm'
 
-function Exercises({ exercises, workout, setExercises }) {
-
-  const [name, setName] = useState("")
-  const [category, setCategory] = useState("")
-  const [sets, setSets] = useState("")
-  const [reps, setReps] = useState("")
-
-  const [showForm, setShowForm] = useState(false)
+function Exercises({ exercises, onDeleteExercise }) {
 
 
-  function onCreateExercise(newExercise){
-    const addNewExercise = [...exercises, newExercise]
-    setExercises(addNewExercise)
-  }
+  // const [name, setName] = useState("")
+  // const [category, setCategory] = useState("")
+  // const [sets, setSets] = useState("")
+  // const [reps, setReps] = useState("")
 
-  function onDeleteExercise(deletedExerciseId){
-    const filterExercises = exercises.filter((exercise) => exercise.id !== deletedExerciseId)  
-    setExercises(filterExercises)
-  }
+  // const [showForm, setShowForm] = useState(false)
 
     const renderExercises = exercises.map((exercise) => {
+      // debugger;
         return (
-          <Exercise key={exercise.id} exercise={exercise} onDeleteExercise={onDeleteExercise}/>
+          <Exercise key={exercise.id} {...exercise} onDeleteExercise={onDeleteExercise} />
         )
     })
 
-    function showExerciseForm(){
-      setShowForm((showForm) => !showForm)
-    }
+    // function showExerciseForm(){
+    //   setShowForm((showForm) => !showForm)
+    // }
 
 
 
   return (
     <Box textAlign='center'>
     <h1>Exercises</h1>
-    <Button variant="contained" size="small" align="center" onClick={showExerciseForm}>Add Exercise</Button>
-    { showForm ? <ExerciseForm onCreateExercise={onCreateExercise} workout={workout} name={name} setName={setName} category={category} setCategory={setCategory} sets={sets} setSets={setSets} reps={reps} setReps={setReps}/> : null }
-
     <div>{renderExercises}</div>
+    {/* { showForm ? <ExerciseForm onCreateExercise={onCreateExercise} workout={workout} name={name} setName={setName} category={category} setCategory={setCategory} sets={sets} setSets={setSets} reps={reps} setReps={setReps}/> : null }
+    <Exercises workout={selectedWorkout} exercises={selectedWorkout.exercises} setExercises={setExercises} onCreateExercise={onCreateExercise} onDeleteExercise={onDeleteExercise}/> */}
     </Box>
   )
 }
