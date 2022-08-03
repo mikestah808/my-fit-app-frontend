@@ -15,7 +15,7 @@ const bull = (
 );
 
 function Exercise({ id, name, category, sets, reps, onDeleteExercise }) {
-  
+
   function handleDeleteClick() {
     fetch(`http://localhost:9292/exercises/${id}`, {
       method: "DELETE",

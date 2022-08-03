@@ -186,7 +186,7 @@ function Workout({ workout, onDeleteWorkout, handleEditButtonClick, editWorkout,
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" to={`workouts/${workout.id}`} component={ Link }>View</Button>
+        <Button size="small" component={ Link } to={`workouts/${workout.id}`} >View</Button>
         <Button size="small" onClick={handleEditClick}>Edit</Button>
         <Button onClick={handleDeleteClick} size="small">Delete</Button>
       </CardActions>

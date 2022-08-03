@@ -5,75 +5,53 @@ import { Button } from '@mui/material';
 import ExerciseForm from './ExerciseForm'
 import { Box } from '@mui/system';
 
-function WorkoutDetail({ workouts, exercises, setExercises }) {
+const BASE_URL = "http://localhost:9292"
+
+
+
+function WorkoutDetail({ workouts, setWorkouts}) {
 
     const [showForm, setShowForm] = useState(false)
     const [name, setName] = useState("")
     const [category, setCategory] = useState("")
     const [sets, setSets] = useState("")
     const [reps, setReps] = useState("")
-    const [click, setClick] = useState(false)
 
-    const [workout, setWorkout] = useState({})
-    const [selectedWorkoutExercises, setSelectedWorkoutExercises] = useState([])
-
-    //go through array of exercises using .find 
-    //for each exercise, return exercises where exercise workout_id == workout.id
-    
-
-    // const findExercises = exercises.find((exercise) => exercise.workout_id == workout.id)
-
+    const [selectedWorkout, setSelectedWorkout] = useState({
+      exercises: []
+    })
+   
   // Get the userId param from the URL.
-  const { id } = useParams();
+    const { id } = useParams();
 
 
   useEffect(() => {
-    // debugger;
-    const findWorkout = workouts.find(w => w.id == id)
-    setWorkout(findWorkout)
-  }, [id, selectedWorkoutExercises])
-
-  useEffect(() => {
-    // debugger;
-    const findWorkoutExercises = exercises.filter(exercise => exercise.workout_id == id)
-    setSelectedWorkoutExercises(findWorkoutExercises)
-  }, [id, click])
-
-  console.log("workout",workout)
-   console.log("selected workout", selectedWorkoutExercises);
-
-  // returns an ARRAY of OBJECTS
-  //state is initially set to an OBJECT with KEY of EXERCISE with empty ARRAY
-  // console.log("selected workout", selectedWorkout)
+    const findWorkout = workouts.find(workout => workout.id == id)
+    setSelectedWorkout(findWorkout)
+  }, [])
 
 
   function showExerciseForm(){
     setShowForm((showForm) => !showForm)
   }
 
-  // console.log("selected workout exercises", selectedWorkout.exercises)
-
 function onCreateExercise(newExercise){
-  // debugger;
-    // const findWorkout = workouts.find(workout => workout.id == id)
-    // setSelectedWorkout(findWorkout, newExercise)
-    const addNewExercise = [...selectedWorkoutExercises, newExercise]
-    console.log("add new exercise", addNewExercise)
-    setSelectedWorkoutExercises(addNewExercise)
-}
+    // debugger;
+    const newExercises = [...selectedWorkout.exercises, newExercise]
+    setSelectedWorkout({...selectedWorkout, exercises: newExercises})
+  }
 
 function onDeleteExercise(deletedExerciseId){
-  const filterExercises = exercises.filter((exercise) => exercise.id !== deletedExerciseId)  
-  setSelectedWorkoutExercises(filterExercises)
+  //when delete button is clicked, function will return exercise.id NOT EQUAL to deletedExerciseId
+  const filterExercises = selectedWorkout.exercises.filter((exercise) => exercise.id !== deletedExerciseId)  
+  setSelectedWorkout({...selectedWorkout, exercises: filterExercises})
 }
-
-// console.log("selected workout", selectedWorkout.id)
 
   return (
     <Box textAlign='center'>
     <Button variant="contained" size="small" align="center" onClick={showExerciseForm}>Add Exercise</Button>
-    { showForm ? <ExerciseForm click={click} setClick={setClick} workout={workout} exercises={selectedWorkoutExercises} onCreateExercise={onCreateExercise} name={name} setName={setName} category={category} setCategory={setCategory} sets={sets} setSets={setSets} reps={reps} setReps={setReps}/> : null }
-    <Exercises exercises={selectedWorkoutExercises} setExercises={setExercises} onDeleteExercise={onDeleteExercise}/>
+    { showForm ? <ExerciseForm workout={selectedWorkout} onCreateExercise={onCreateExercise} name={name} setName={setName} category={category} setCategory={setCategory} sets={sets} setSets={setSets} reps={reps} setReps={setReps}/> : null }
+    <Exercises workout={selectedWorkout} onDeleteExercise={onDeleteExercise}/>
     </Box >
   )
 }
