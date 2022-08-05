@@ -114,7 +114,7 @@ const HelperText = styled((props) => {
   font-size: 0.875rem;
 `;
 
-function ExerciseForm({ onCreateExercise, workout, name, setName, category, setCategory, sets, setSets, reps, setReps }) {
+function ExerciseForm({ onCreateExercise, workout, name, setName, category, setCategory, sets, setSets, reps, setReps, pointlessButton }) {
 
 
   function handleNameChange(event) {
@@ -162,6 +162,7 @@ function ExerciseForm({ onCreateExercise, workout, name, setName, category, setC
     setCategory("");
     setSets(0);
     setReps(0);
+    pointlessButton();
   }
 
 //once form is submitted, how will the exercise form be tied to the same workout id? 

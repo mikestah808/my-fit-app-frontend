@@ -5,11 +5,8 @@ import { Button } from '@mui/material';
 import ExerciseForm from './ExerciseForm'
 import { Box } from '@mui/system';
 
-const BASE_URL = "http://localhost:9292"
 
-
-
-function WorkoutDetail({ workouts, setWorkouts}) {
+function WorkoutDetail({ workouts, setWorkouts, pointlessButton }) {
 
     const [showForm, setShowForm] = useState(false)
     const [name, setName] = useState("")
@@ -25,10 +22,13 @@ function WorkoutDetail({ workouts, setWorkouts}) {
     const { id } = useParams();
 
 
-  useEffect(() => {
-    const findWorkout = workouts.find(workout => workout.id == id)
-    setSelectedWorkout(findWorkout)
-  }, [])
+    useEffect(() => {
+      //debugger;
+      const findWorkout = workouts.find(workout => workout.id === parseInt(id))
+      if (findWorkout){
+        setSelectedWorkout(findWorkout)
+      }
+    }, [workouts])
 
 
   function showExerciseForm(){
@@ -38,20 +38,30 @@ function WorkoutDetail({ workouts, setWorkouts}) {
 function onCreateExercise(newExercise){
     // debugger;
     const newExercises = [...selectedWorkout.exercises, newExercise]
+    // go through all the workouts 
+    //changing the exercises of that one workout once it is found 
+    //have to let workouts know about this new exercise
+    const newWorkouts = workouts.map((workout) => workout.id === newExercise.id ? [...workouts, {selectedWorkout, exercises: newExercises}] : workout)
+    // const newWorkouts = workouts.map((workout) => workout.id == newExercise.id ? [...workouts, {selectedWorkout, exercises: newExercises}] : workout)
     setSelectedWorkout({...selectedWorkout, exercises: newExercises})
+    setWorkouts(newWorkouts)
   }
 
 function onDeleteExercise(deletedExerciseId){
   //when delete button is clicked, function will return exercise.id NOT EQUAL to deletedExerciseId
   const filterExercises = selectedWorkout.exercises.filter((exercise) => exercise.id !== deletedExerciseId)  
   setSelectedWorkout({...selectedWorkout, exercises: filterExercises})
+  //have to let workouts know about this deleted exercise
+  // const newWorkouts = workouts.map((workout) => workout.id == deletedExerciseId ? [...workout, {selectedWorkout, exercises: filterExercises}] : workout)
+  // setWorkouts(newWorkouts)
 }
 
   return (
     <Box textAlign='center'>
     <Button variant="contained" size="small" align="center" onClick={showExerciseForm}>Add Exercise</Button>
-    { showForm ? <ExerciseForm workout={selectedWorkout} onCreateExercise={onCreateExercise} name={name} setName={setName} category={category} setCategory={setCategory} sets={sets} setSets={setSets} reps={reps} setReps={setReps}/> : null }
-    <Exercises workout={selectedWorkout} onDeleteExercise={onDeleteExercise}/>
+    { showForm ? <ExerciseForm pointlessButton={pointlessButton} workout={selectedWorkout} onCreateExercise={onCreateExercise} name={name} setName={setName} category={category} setCategory={setCategory} sets={sets} setSets={setSets} reps={reps} setReps={setReps}/> : null }
+    {/* {selectedWorkout.exercises.length > 0 ? <Exercises workout={selectedWorkout} onDeleteExercise={onDeleteExercise}/> : null} */}
+     <Exercises workout={selectedWorkout} onDeleteExercise={onDeleteExercise}/>
     </Box >
   )
 }

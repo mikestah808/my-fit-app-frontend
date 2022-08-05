@@ -11,25 +11,32 @@ const BASE_URL = "http://localhost:9292"
 function App() {
   const [workouts, setWorkouts] = useState([])
   const [search, setSearch] = useState("")
+  const [click, setClick] = useState(false)
+
+
+  function pointlessButton(){
+    setClick(!click)
+    // this will just toggle between true and false. doesn't offer anything but to tell useEffect to re-render
+  }
 
 useEffect(() => {
+  // debugger;
   fetch(BASE_URL + '/workouts')
   .then((resp) => resp.json())
   .then((workoutData) => {
     setWorkouts(workoutData)
   })
-}, [])
+}, [click])
 
-const filterWorkouts = workouts.filter((workout) => workout.title.toLowerCase().includes(search.toLowerCase()))
+// const filterWorkouts = workouts.filter((workout) => workout.title.toLowerCase().includes(search.toLowerCase()))
   
 
   return (
     <BrowserRouter>
      <NavBar search={search} setSearch={setSearch}/>
      <Routes>
-        <Route path="/workouts/:id" 
-        element={ <WorkoutDetail workouts={workouts} setWorkouts={setWorkouts}/> }/>
-        <Route path="/" element={ <HomePage workouts={filterWorkouts} search={search} setWorkouts={setWorkouts}/> }/>
+        <Route exact path="/" element={ <HomePage workouts={workouts} search={search} setWorkouts={setWorkouts}/> }/>
+        <Route path="/workouts/:id" element={ <WorkoutDetail workouts={workouts} setWorkouts={setWorkouts} pointlessButton={pointlessButton}/> }/>
      </Routes>
     </BrowserRouter>
   );

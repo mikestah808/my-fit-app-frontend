@@ -2,7 +2,7 @@ import React from 'react'
 import Exercise from './Exercise'
 import { Box } from '@mui/system';
 
-function Exercises({ workout, onDeleteExercise, setActiveRoute }) {
+function Exercises({ workout, onDeleteExercise }) {
 
     const renderExercises = workout.exercises.map((exercise) => {
         return (
