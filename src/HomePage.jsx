@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import WorkoutList from './WorkoutList';
 import WorkoutForm from './WorkoutForm';
 
-function HomePage({ setWorkouts, workouts }) {
+function HomePage({ setWorkouts, workouts, toggleButton }) {
 
   const [showForm, setShowForm] = useState(false)
 
@@ -48,7 +48,7 @@ function HomePage({ setWorkouts, workouts }) {
                 Add Workout
             </Button>
         </Box>
-        { showForm ? <WorkoutForm workouts={workouts} setWorkouts={setWorkouts} onCreateWorkout={onCreateWorkout} title={title} setTitle={setTitle} level={level} setLevel={setLevel}/> : null }
+        { showForm ? <WorkoutForm toggleButton={toggleButton} workouts={workouts} setWorkouts={setWorkouts} onCreateWorkout={onCreateWorkout} title={title} setTitle={setTitle} level={level} setLevel={setLevel}/> : null }
         <WorkoutList editWorkout={editWorkout} setEditWorkout={setEditWorkout} workouts={workouts} onDeleteWorkout={onDeleteWorkout} handleEditButtonClick={handleEditButtonClick} onUpdateWorkout={onUpdateWorkout} setTitle={setTitle} setLevel={setLevel}/>
     </div>
   )

@@ -112,7 +112,7 @@ const HelperText = styled((props) => {
   font-size: 0.875rem;
 `;
 
-function WorkoutForm({ onCreateWorkout, title, setTitle, level, setLevel}) {
+function WorkoutForm({ toggleButton, onCreateWorkout, title, setTitle, level, setLevel}) {
 
 
   function handleTitleChange(event) {
@@ -151,6 +151,7 @@ function WorkoutForm({ onCreateWorkout, title, setTitle, level, setLevel}) {
 
     setTitle("");
     setLevel("");
+    toggleButton();
   }
 
 //if the formData input values are not all filled out, then throw out error 
