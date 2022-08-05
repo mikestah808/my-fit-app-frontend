@@ -1,21 +1,32 @@
 # My Fit Application 
 
-### Overview
+## Overview
 This is a frontend application for a workout tracker app
 
-### Requirements 
+## Requirements 
 * node version v16.11.1
 * npm version 8.6.0
 
 
 
-### How to use 
-Fork and clone 
-Run npm install 
-Run npm start 
-Follow for directions for backend [url here]  
+## How to use 
+* Fork and clone 
+* Run npm install 
+* Run npm start 
+* Follow for directions for backend [url here]  
 
-### Licensing (MIT)
+## Features 
+
+* Homepage 
+* Navigation
+* Create workouts 
+* Read workouts 
+* Update workouts 
+* Delete workouts 
+* Create Exercises
+* Delete Exercises 
+
+## Licensing (MIT)
 
 Copyright (c) 2022
 
@@ -38,3 +49,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 ### Contributing 
+
+## Technologies used 
+
+This web app was made with:
+
+* HTML
+* CSS
+* Javascript
+* React Library
+* Ruby
+* Sinatra Backend
