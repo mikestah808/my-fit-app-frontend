@@ -26,6 +26,10 @@ This is a frontend application for a workout tracker app
 * Create Exercises
 * Delete Exercises 
 
+## Video Demo Link 
+
+https://youtu.be/flraTNVwACU
+
 ## Licensing (MIT)
 
 Copyright (c) 2022
