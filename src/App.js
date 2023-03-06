@@ -17,7 +17,6 @@ function App() {
 
   function pointlessButton(){
     setClick(!click)
-    // this will just toggle between true and false. doesn't offer anything but to tell useEffect to re-render
   }
 
   function toggleButton(){
@@ -25,7 +24,6 @@ function App() {
   }
 
 useEffect(() => {
-  // debugger;
   fetch(BASE_URL + '/workouts')
   .then((resp) => resp.json())
   .then((workoutData) => {
