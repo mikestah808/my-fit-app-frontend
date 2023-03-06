@@ -67,7 +67,6 @@ const Search = styled('div')(({ theme }) => ({
                 type="text"
                 id="search"
                 placeholder="Search…"
-                // inputProps={{ 'aria-label': 'search' }}
                 value={search}
                 onChange={handleSearch}
               />

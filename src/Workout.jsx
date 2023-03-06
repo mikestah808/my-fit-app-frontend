@@ -147,7 +147,6 @@ function Workout({ workout, onDeleteWorkout, handleEditButtonClick, editWorkout,
 
   function handleEditClick(){
     setEdit((edit) => !edit)
-     // fill in form inputs with key/pair values with object returned from HTTP GET request
     fetch(`http://localhost:9292/workouts/${workout.id}`)
     .then((resp) => resp.json())
     .then((selectedWorkout) => handleEditButtonClick(selectedWorkout));

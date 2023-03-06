@@ -131,11 +131,8 @@ function WorkoutForm({ toggleButton, onCreateWorkout, title, setTitle, level, se
       title: title,
       level: level
     };
-    //what do we do once this data is submitted? 
-    //send the state value of submittedData as a POST request to the correct path
     
     if(formData.title !== "" && formData.level !== ""){
-      // debugger;
       fetch(WORKOUTS_URL, {
         method: 'POST',
         headers: {
@@ -153,10 +150,6 @@ function WorkoutForm({ toggleButton, onCreateWorkout, title, setTitle, level, se
     setLevel("");
     toggleButton();
   }
-
-//if the formData input values are not all filled out, then throw out error 
-//else, do the POST request 
-
 
   return (
     <form onSubmit={handleWorkoutSubmit}>

@@ -28,8 +28,6 @@ function HomePage({ setWorkouts, workouts, toggleButton }) {
   }
 
  function onUpdateWorkout(updatedWorkout){
-  // check to see if the workout.id matches with the updatedWorkout.id
-  //if it does, then return the updatedWorkout object, if not, then keep workout 
   const updateWorkout = workouts.map((workout) => workout.id === updatedWorkout.id ? updatedWorkout : workout)
   setWorkouts(updateWorkout)
  }

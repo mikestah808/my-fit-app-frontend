@@ -46,6 +46,3 @@ const filterWorkouts = workouts.filter((workout) => workout.title.toLowerCase().
 }
 
 export default App;
-
-//if no exercises are on the page and an exercise is submitted, IT DOES NOT render on the page immediately 
-//the exercise will render after 

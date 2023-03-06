@@ -165,9 +165,6 @@ function ExerciseForm({ onCreateExercise, workout, name, setName, category, setC
     pointlessButton();
   }
 
-//once form is submitted, how will the exercise form be tied to the same workout id? 
-
-
   return (
     <form onSubmit={handleWorkoutSubmit}>
       <Label>Name:</Label>
